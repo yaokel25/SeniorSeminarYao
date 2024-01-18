@@ -19,16 +19,16 @@ classroom class:
 • int seminar1ID, int seminar2ID, … 
 
 
-make a list for people that still need to go to first session
-loop through everyone choices and get the 5 most most requested seminars 
+make a list for people that still need to go to first session (make copy of arrayList of students)
+loop through everyone choices and get the 5 most most requested seminars (array of int seminarID)
 for most requested seminar:
-while seminar is not full:
+while seminar is not full (seminar arrayList):
 for(every’s first choice):
 if(their choice is that seminar):
-register that person for the seminar for session 1
-add seminar ID to that person’s list 
-remove person from first session list 
-remove seminar from person’s preference list
+register that person for the seminar for session 1 
+add seminar ID to that person’s list (add to student arryaList)
+remove person from first session list (remove from copy of arrayList of students)
+remove seminar from person’s preference list (remove from arrayList of students)
 
 repeat for top 5 choices for every student (as long as seminar is not full) 
 

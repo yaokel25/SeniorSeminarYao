@@ -1,8 +1,7 @@
 
 
 public class Student{
-    private String name1;
-    private String name2;
+    private String name;
     private String email;
     private int choice1;
     private int choice2;
