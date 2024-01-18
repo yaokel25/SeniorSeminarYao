@@ -37,3 +37,9 @@ for any seminar not full and student not assigned, randomly assigned them
 (# of time run for those sessions) ++
 
 repeat that for 5 sessions and if (# of times run) > remove seminar from list of available seminars 
+
+
+
+123
+123
+123
