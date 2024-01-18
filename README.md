@@ -38,8 +38,9 @@ for any seminar not full and student not assigned, randomly assigned them
 
 repeat that for 5 sessions and if (# of times run) > remove seminar from list of available seminars 
 
+1/18:
+thought about data storage (array vs ArrayList, etc)-added the data types in the explaination above
+cleaned up data file (SrSeminar.csv)
+finished the fil.io and tested it in the tester file 
+loaded student data into arrayList of students 
 
-
-123
-123
-123
