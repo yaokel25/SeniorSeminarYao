@@ -12,6 +12,11 @@ public class Schedule{
     private int choice4;
     private int choice5;
     public ArrayList<Student> senior = new ArrayList<Student>();
+    private int[] rankChoice = new int[20];//all seminar IDs except 0 is no choice and 19 is already completed choice
+    private int numSeminars =20;//not 18 because no choice is 0 and 19 is already completed choice
+    private int numRoom = 5;
+    private int numStudents = 74;
+    int[] hold5 = new int[numRoom];
 
     public void readFile(){
         try {
@@ -37,10 +42,64 @@ public class Schedule{
         }
     }//method readFile
 
-    public void getRank(){
-        for(Student s2: senior){
-            
+    public int[] getRank(){
+        int holdChoice = 0;
+        //initialize rankChoice array
+        for(int i = 0; i < numSeminars; i++){
+            rankChoice[i] = 0;
+        }
+        //tallying student choices
+        for(Student s1: senior){
+            holdChoice = s1.getChoice1();
+            rankChoice[holdChoice] ++;
+            holdChoice = s1.getChoice2();
+            rankChoice[holdChoice] ++;
+            holdChoice = s1.getChoice3();
+            rankChoice[holdChoice] ++;
+            holdChoice = s1.getChoice4();
+            rankChoice[holdChoice] ++;
+            holdChoice = s1.getChoice5();
+            rankChoice[holdChoice] ++;
+        }//for-49
+        return rankChoice;
+    }//method getRank
+    
+    
+    public int[] get5(){
+        //make copy of rankChoice array
+        int[] holdSeminar = new int[numSeminars];
+        for(int p = 0; p < numSeminars; p++){
+            holdSeminar[p] = rankChoice[p];
+        }
+        //get top 5 choices by doig bubble sort 5 times
+        int holdIndex = 0;
+        int holdNum = 0;
+        for(int j = 0; j < numRoom; j++){
+            for(int f = 0; f < numSeminars; f++){
+                if(holdSeminar[f] > holdNum){
+                    holdIndex = f;
+                    holdNum = holdSeminar[f];
+                }//if
+            }
+            hold5[j] = holdIndex;
+            holdSeminar[holdIndex] = 0;
+            holdIndex = 0;
+            holdNum = 0;
+        }
+        return hold5;
+    }//method get5
+    public void withRank(){
+        ArrayList<Student> holdstudent = new ArrayList<Student>();
+
+        for(int p = 0; p < numStudents; p++){
+            holdstudent.add(senior.get(p));
+        }
+        for(int j = 0; j < numRoom; j++){
+            for(int i = 0; i < numStudents; i++){
+                if(holdstudent.get(i).getChoice1() == hold5[j]){
+                    holdstudent.get(i).setSeminar1(hold5[j]);
+                }
+            }
         }
     }
-
 }

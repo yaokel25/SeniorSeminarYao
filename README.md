@@ -44,3 +44,9 @@ cleaned up data file (SrSeminar.csv)
 finished the fil.io and tested it in the tester file 
 loaded student data into arrayList of students 
 
+1/22:
+made methods getRank(), get5(), and withRank()
+getRank()-tallying all student choices and putting data into array 
+get5()-get top 5 choices by doing bubble sort 5 times
+with Rank()-register people for seminar based on choices only
+

@@ -10,3 +10,10 @@ public class Seminar{
     private int numStudents = 0;
 
 }
+public Seminar(int iSeminarID, String iInstru){
+    seminarID = iSeminarID;
+    instru = iInstru;
+}
+public void addStudent(){
+
+}
