@@ -98,7 +98,42 @@ public class Schedule{
             for(int i = 0; i < numStudents; i++){
                 if(holdstudent.get(i).getChoice1() == hold5[j]){
                     holdstudent.get(i).setSeminar1(hold5[j]);
+                    holdstudent.get(i).setChoice1();
+                    //need to add seminar
                 }
+            }
+            for(int a = 0; a < numStudents; a++){
+                if(holdstudent.get(a).getChoice2() == hold5[j] && holdstudent.get(a).getSeminar1() != -1){
+                    holdstudent.get(a).setSeminar1(hold5[j]);
+                    holdstudent.get(a).setChoice1();
+                    //need to add seminar
+                }
+            }
+            for(int b = 0; b < numStudents; b++){
+                if(holdstudent.get(b).getChoice3() == hold5[j] && holdstudent.get(b).getSeminar1() != -1){
+                    holdstudent.get(b).setSeminar1(hold5[j]);
+                    holdstudent.get(b).setChoice1();
+                    //need to add seminar
+                }
+            }
+            for(int c = 0; c < numStudents; c++){
+                if(holdstudent.get(c).getChoice4() == hold5[j] && holdstudent.get(c).getSeminar1() != -1){
+                    holdstudent.get(c).setSeminar1(hold5[j]);
+                    holdstudent.get(c).setChoice1();
+                    //need to add seminar
+                }
+            }
+            for(int d = 0; d < numStudents; d++){
+                if(holdstudent.get(d).getChoice5() == hold5[j] && holdstudent.get(d).getSeminar1() != -1){
+                    holdstudent.get(d).setSeminar1(hold5[j]);
+                    holdstudent.get(d).setChoice1();
+                    //need to add seminar
+                }
+            }
+        }
+        for(int g = 0; g < numStudents; g++){
+            if(holdstudent.get(g).getSeminar1()){
+
             }
         }
     }

@@ -67,6 +67,21 @@ public class Student{
     public void setSeminar5(int seminarNum){
         seminar5 = seminarNum;
     }
+    public int getSeminar1(){
+        return seminar1;
+    }
+    public int getSeminar2(){
+        return seminar2;
+    }
+    public int getSeminar3(){
+        return seminar3;
+    }
+    public int getSeminar4(){
+        return seminar4;
+    }
+    public int getSeminar5(){
+        return seminar5;
+    }
    public String toString(){
     return(email + " " + name + " " + choice1 + " " + choice2 + " " + choice3 + " " + choice4 + " " + choice5);
    }
