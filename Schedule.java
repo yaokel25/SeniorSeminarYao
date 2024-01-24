@@ -16,7 +16,12 @@ public class Schedule{
     private int numSeminars =20;//not 18 because no choice is 0 and 19 is already completed choice
     private int numRoom = 5;
     private int numStudents = 74;
-    int[] hold5 = new int[numRoom];
+    private int[] hold5 = new int[numRoom];
+    private ArrayList<Seminar> seminarList = new ArrayList<Seminar>();
+
+    public void makeSeminars(){
+        
+    }
 
     public void readFile(){
         try {
@@ -90,7 +95,6 @@ public class Schedule{
     }//method get5
     public void withRank(){
         ArrayList<Student> holdstudent = new ArrayList<Student>();
-
         for(int p = 0; p < numStudents; p++){
             holdstudent.add(senior.get(p));
         }
@@ -105,34 +109,34 @@ public class Schedule{
             for(int a = 0; a < numStudents; a++){
                 if(holdstudent.get(a).getChoice2() == hold5[j] && holdstudent.get(a).getSeminar1() != -1){
                     holdstudent.get(a).setSeminar1(hold5[j]);
-                    holdstudent.get(a).setChoice1();
+                    holdstudent.get(a).setChoice2();
                     //need to add seminar
                 }
             }
             for(int b = 0; b < numStudents; b++){
                 if(holdstudent.get(b).getChoice3() == hold5[j] && holdstudent.get(b).getSeminar1() != -1){
                     holdstudent.get(b).setSeminar1(hold5[j]);
-                    holdstudent.get(b).setChoice1();
+                    holdstudent.get(b).setChoice3();
                     //need to add seminar
                 }
             }
             for(int c = 0; c < numStudents; c++){
                 if(holdstudent.get(c).getChoice4() == hold5[j] && holdstudent.get(c).getSeminar1() != -1){
                     holdstudent.get(c).setSeminar1(hold5[j]);
-                    holdstudent.get(c).setChoice1();
+                    holdstudent.get(c).setChoice4();
                     //need to add seminar
                 }
             }
             for(int d = 0; d < numStudents; d++){
                 if(holdstudent.get(d).getChoice5() == hold5[j] && holdstudent.get(d).getSeminar1() != -1){
                     holdstudent.get(d).setSeminar1(hold5[j]);
-                    holdstudent.get(d).setChoice1();
+                    holdstudent.get(d).setChoice5();
                     //need to add seminar
                 }
             }
         }
         for(int g = 0; g < numStudents; g++){
-            if(holdstudent.get(g).getSeminar1()){
+            if(holdstudent.get(g).getSeminar1() == -1){
 
             }
         }
