@@ -11,14 +11,23 @@ public class Schedule{
     private int choice3;
     private int choice4;
     private int choice5;
+    private int numChoices = 5;
     public ArrayList<Student> senior = new ArrayList<Student>();
-    private int[] rankChoice = new int[20];//all seminar IDs except 0 is no choice and 19 is already completed choice
-    private int numSeminars =20;//not 18 because no choice is 0 and 19 is already completed choice
+    private int[] rankChoice = new int[18];//all seminar IDs except 0 is no choice and 19 is already completed choice
+    private int numSeminars = 20;//not 18 because no choice is 0 and 19 is already completed choice
     private int numRoom = 5;
     private int numStudents = 74;
     private int[] hold5 = new int[numRoom];
     private ArrayList<Seminar> seminarList = new ArrayList<Seminar>();
+    private Seminar[][] schedule = new Seminar[5][5];
+    private int[] numTimes = new int[18];
 
+    public boolean canAdd(int sessionID){
+        if(numTimes[sessionID] >=2){
+            return false;
+        }
+        return true;
+    }
     public void makeSeminars(){
         
     }
@@ -45,26 +54,40 @@ public class Schedule{
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        try {
+            File myObj = new File("SessionName.csv");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+            String data = myReader.nextLine();
+            String[] myArray = data.split(",", 0);
+            String sessionName = myArray[0];
+            int sessionID = Integer.parseInt(myArray[1]);
+            String instructor = myArray[2];
+            Seminar seminar1 = new Seminar(sessionID, instructor, sessionName);
+            seminarList.add(seminar1);
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }//method readFile
 
     public int[] getRank(){
         int holdChoice = 0;
         //initialize rankChoice array
-        for(int i = 0; i < numSeminars; i++){
+        for(int i = 0; i < numSeminars - 2; i++){
             rankChoice[i] = 0;
         }
+        
         //tallying student choices
         for(Student s1: senior){
-            holdChoice = s1.getChoice1();
-            rankChoice[holdChoice] ++;
-            holdChoice = s1.getChoice2();
-            rankChoice[holdChoice] ++;
-            holdChoice = s1.getChoice3();
-            rankChoice[holdChoice] ++;
-            holdChoice = s1.getChoice4();
-            rankChoice[holdChoice] ++;
-            holdChoice = s1.getChoice5();
-            rankChoice[holdChoice] ++;
+            for(int i = 0; i < numChoices; i++){
+                if(s1.getChoice(i) != 0 && s1.getChoice(i) != 19){
+                    holdChoice = s1.getChoice(i) - 1;
+                    rankChoice[holdChoice] ++;
+                }
+            }
         }//for-49
         return rankChoice;
     }//method getRank
@@ -72,8 +95,8 @@ public class Schedule{
     
     public int[] get5(){
         //make copy of rankChoice array
-        int[] holdSeminar = new int[numSeminars];
-        for(int p = 0; p < numSeminars; p++){
+        int[] holdSeminar = new int[numSeminars - 2];
+        for(int p = 0; p < numSeminars - 2; p++){
             holdSeminar[p] = rankChoice[p];
         }
         //get top 5 choices by doig bubble sort 5 times
@@ -86,58 +109,136 @@ public class Schedule{
                     holdNum = holdSeminar[f];
                 }//if
             }
+            if(canAdd(holdIndex)){
             hold5[j] = holdIndex;
+            numTimes[holdIndex] ++;
+            }
             holdSeminar[holdIndex] = 0;
             holdIndex = 0;
             holdNum = 0;
         }
         return hold5;
     }//method get5
-    public void withRank(){
+    
+    public void makeSchedule(int session){
+        for(int i = 0; i < numRoom; i++){
+            schedule[session][i] = seminarList.get(hold5[i]);
+        }
+    }
+    
+    public void assignSession(int session){
         ArrayList<Student> holdstudent = new ArrayList<Student>();
         for(int p = 0; p < numStudents; p++){
             holdstudent.add(senior.get(p));
         }
         for(int j = 0; j < numRoom; j++){
             for(int i = 0; i < numStudents; i++){
-                if(holdstudent.get(i).getChoice1() == hold5[j]){
-                    holdstudent.get(i).setSeminar1(hold5[j]);
-                    holdstudent.get(i).setChoice1();
-                    //need to add seminar
-                }
-            }
-            for(int a = 0; a < numStudents; a++){
-                if(holdstudent.get(a).getChoice2() == hold5[j] && holdstudent.get(a).getSeminar1() != -1){
-                    holdstudent.get(a).setSeminar1(hold5[j]);
-                    holdstudent.get(a).setChoice2();
-                    //need to add seminar
-                }
-            }
-            for(int b = 0; b < numStudents; b++){
-                if(holdstudent.get(b).getChoice3() == hold5[j] && holdstudent.get(b).getSeminar1() != -1){
-                    holdstudent.get(b).setSeminar1(hold5[j]);
-                    holdstudent.get(b).setChoice3();
-                    //need to add seminar
-                }
-            }
-            for(int c = 0; c < numStudents; c++){
-                if(holdstudent.get(c).getChoice4() == hold5[j] && holdstudent.get(c).getSeminar1() != -1){
-                    holdstudent.get(c).setSeminar1(hold5[j]);
-                    holdstudent.get(c).setChoice4();
-                    //need to add seminar
-                }
-            }
-            for(int d = 0; d < numStudents; d++){
-                if(holdstudent.get(d).getChoice5() == hold5[j] && holdstudent.get(d).getSeminar1() != -1){
-                    holdstudent.get(d).setSeminar1(hold5[j]);
-                    holdstudent.get(d).setChoice5();
-                    //need to add seminar
+                for(int h = 0; h < numChoices; h++){
+                    if(holdstudent.get(i).getChoice(h) == hold5[j] && schedule[session][j].checkNum()){
+                        //holdstudent.get(i).setSeminar(hold5[j], h);
+                        //holdstudent.get(i).setChoice(h);
+                        senior.get(i).setSeminar(hold5[j], h);
+                        senior.get(i).setChoice(h);
+                        schedule[session][j].addStudent(holdstudent.get(i));
+                    }
                 }
             }
         }
+        //assign students who did not pick any of the choice or did not rank seminars at all randomly to any open seminar
+        for(int g = 0; g < numStudents; g++){
+            for(int p = 0; p < numChoices; p++){
+            if(holdstudent.get(g).getSeminar1() == -1){
+                if(schedule[0][hold5[0]].checkNum()){
+                    holdstudent.get(g).setSeminar1(hold5[0]);
+                    senior.get(g).setSeminar1(hold5[0]);
+                    schedule[0][hold5[0]].addStudent(holdstudent.get(g));
+                }
+            }
+                else if(schedule[0][hold5[1]].checkNum()){
+                    holdstudent.get(g).setSeminar1(hold5[1]);
+                    senior.get(g).setSeminar1(hold5[1]);
+                    schedule[0][hold5[1]].addStudent(holdstudent.get(g));
+                }
+                else if(schedule[0][hold5[2]].checkNum()){
+                    holdstudent.get(g).setSeminar1(hold5[2]);
+                    senior.get(g).setSeminar1(hold5[2]);
+                    schedule[0][hold5[2]].addStudent(holdstudent.get(g));
+                }
+                else if(schedule[0][hold5[3]].checkNum()){
+                    holdstudent.get(g).setSeminar1(hold5[3]);
+                    senior.get(g).setSeminar1(hold5[3]);
+                    schedule[0][hold5[3]].addStudent(holdstudent.get(g));
+                }
+                else if(schedule[0][hold5[4]].checkNum()){
+                    holdstudent.get(g).setSeminar1(hold5[4]);
+                    senior.get(g).setSeminar1(hold5[4]);
+                    schedule[0][hold5[4]].addStudent(holdstudent.get(g));
+                }
+            }
+        }
+    }
+
+    public void assignSession2(){
+        for(int j = 0; j < numRoom; j++){
+            for(int i = 0; i < numStudents; i++){
+                if(senior.get(i).getChoice1() == hold5[j] && schedule[1][j].checkNum()){
+                    senior.get(i).setSeminar1(hold5[j]);
+                    senior.get(i).setChoice1();
+                    schedule[1][j].addStudent(senior.get(i));
+                }
+            }
+            for(int a = 0; a < numStudents; a++){
+                if(senior.get(a).getChoice2() == hold5[j] && schedule[1][j].checkNum()){
+                    senior.get(a).setSeminar1(hold5[j]);
+                    senior.get(a).setChoice2();
+                    schedule[1][j].addStudent(senior.get(a));
+                }
+            }
+            for(int b = 0; b < numStudents; b++){
+                if(senior.get(b).getChoice3() == hold5[j] && schedule[1][j].checkNum()){
+                    senior.get(b).setSeminar1(hold5[j]);
+                    senior.get(b).setChoice3();
+                    schedule[0][j].addStudent(senior.get(b));
+                }
+            }
+            for(int c = 0; c < numStudents; c++){
+                if(holdstudent.get(c).getChoice4() == hold5[j] && schedule[0][j].checkNum()){
+                    holdstudent.get(c).setSeminar1(hold5[j]);
+                    holdstudent.get(c).setChoice4();
+                    schedule[0][j].addStudent(holdstudent.get(c));
+                }
+            }
+            for(int d = 0; d < numStudents; d++){
+                if(holdstudent.get(d).getChoice5() == hold5[j] && schedule[0][j].checkNum()){
+                    holdstudent.get(d).setSeminar1(hold5[j]);
+                    holdstudent.get(d).setChoice5();
+                    schedule[0][j].addStudent(holdstudent.get(d));
+                }
+            }
+        }
+        //assign students who did not pick any of the choice or did not rank seminars at all randomly to any open seminar
         for(int g = 0; g < numStudents; g++){
             if(holdstudent.get(g).getSeminar1() == -1){
-
+                if(schedule[0][hold5[0]].checkNum()){
+                    holdstudent.get(g).setSeminar1(hold5[0]);
+                    schedule[0][hold5[0]].addStudent(holdstudent.get(g));
+                }
+                else if(schedule[0][hold5[1]].checkNum()){
+                    holdstudent.get(g).setSeminar1(hold5[1]);
+                    schedule[0][hold5[1]].addStudent(holdstudent.get(g));
+                }
+                else if(schedule[0][hold5[2]].checkNum()){
+                    holdstudent.get(g).setSeminar1(hold5[2]);
+                    schedule[0][hold5[2]].addStudent(holdstudent.get(g));
+                }
+                else if(schedule[0][hold5[3]].checkNum()){
+                    holdstudent.get(g).setSeminar1(hold5[3]);
+                    schedule[0][hold5[3]].addStudent(holdstudent.get(g));
+                }
+                else if(schedule[0][hold5[4]].checkNum()){
+                    holdstudent.get(g).setSeminar1(hold5[4]);
+                    schedule[0][hold5[4]].addStudent(holdstudent.get(g));
+                }
             }
         }
     }
