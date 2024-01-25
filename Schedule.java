@@ -147,97 +147,12 @@ public class Schedule{
         //assign students who did not pick any of the choice or did not rank seminars at all randomly to any open seminar
         for(int g = 0; g < numStudents; g++){
             for(int p = 0; p < numChoices; p++){
-            if(holdstudent.get(g).getSeminar1() == -1){
-                if(schedule[0][hold5[0]].checkNum()){
-                    holdstudent.get(g).setSeminar1(hold5[0]);
-                    senior.get(g).setSeminar1(hold5[0]);
-                    schedule[0][hold5[0]].addStudent(holdstudent.get(g));
-                }
-            }
-                else if(schedule[0][hold5[1]].checkNum()){
-                    holdstudent.get(g).setSeminar1(hold5[1]);
-                    senior.get(g).setSeminar1(hold5[1]);
-                    schedule[0][hold5[1]].addStudent(holdstudent.get(g));
-                }
-                else if(schedule[0][hold5[2]].checkNum()){
-                    holdstudent.get(g).setSeminar1(hold5[2]);
-                    senior.get(g).setSeminar1(hold5[2]);
-                    schedule[0][hold5[2]].addStudent(holdstudent.get(g));
-                }
-                else if(schedule[0][hold5[3]].checkNum()){
-                    holdstudent.get(g).setSeminar1(hold5[3]);
-                    senior.get(g).setSeminar1(hold5[3]);
-                    schedule[0][hold5[3]].addStudent(holdstudent.get(g));
-                }
-                else if(schedule[0][hold5[4]].checkNum()){
-                    holdstudent.get(g).setSeminar1(hold5[4]);
-                    senior.get(g).setSeminar1(hold5[4]);
-                    schedule[0][hold5[4]].addStudent(holdstudent.get(g));
-                }
-            }
-        }
-    }
-
-    public void assignSession2(){
-        for(int j = 0; j < numRoom; j++){
-            for(int i = 0; i < numStudents; i++){
-                if(senior.get(i).getChoice1() == hold5[j] && schedule[1][j].checkNum()){
-                    senior.get(i).setSeminar1(hold5[j]);
-                    senior.get(i).setChoice1();
-                    schedule[1][j].addStudent(senior.get(i));
-                }
-            }
-            for(int a = 0; a < numStudents; a++){
-                if(senior.get(a).getChoice2() == hold5[j] && schedule[1][j].checkNum()){
-                    senior.get(a).setSeminar1(hold5[j]);
-                    senior.get(a).setChoice2();
-                    schedule[1][j].addStudent(senior.get(a));
-                }
-            }
-            for(int b = 0; b < numStudents; b++){
-                if(senior.get(b).getChoice3() == hold5[j] && schedule[1][j].checkNum()){
-                    senior.get(b).setSeminar1(hold5[j]);
-                    senior.get(b).setChoice3();
-                    schedule[0][j].addStudent(senior.get(b));
-                }
-            }
-            for(int c = 0; c < numStudents; c++){
-                if(holdstudent.get(c).getChoice4() == hold5[j] && schedule[0][j].checkNum()){
-                    holdstudent.get(c).setSeminar1(hold5[j]);
-                    holdstudent.get(c).setChoice4();
-                    schedule[0][j].addStudent(holdstudent.get(c));
-                }
-            }
-            for(int d = 0; d < numStudents; d++){
-                if(holdstudent.get(d).getChoice5() == hold5[j] && schedule[0][j].checkNum()){
-                    holdstudent.get(d).setSeminar1(hold5[j]);
-                    holdstudent.get(d).setChoice5();
-                    schedule[0][j].addStudent(holdstudent.get(d));
-                }
-            }
-        }
-        //assign students who did not pick any of the choice or did not rank seminars at all randomly to any open seminar
-        for(int g = 0; g < numStudents; g++){
-            if(holdstudent.get(g).getSeminar1() == -1){
-                if(schedule[0][hold5[0]].checkNum()){
-                    holdstudent.get(g).setSeminar1(hold5[0]);
-                    schedule[0][hold5[0]].addStudent(holdstudent.get(g));
-                }
-                else if(schedule[0][hold5[1]].checkNum()){
-                    holdstudent.get(g).setSeminar1(hold5[1]);
-                    schedule[0][hold5[1]].addStudent(holdstudent.get(g));
-                }
-                else if(schedule[0][hold5[2]].checkNum()){
-                    holdstudent.get(g).setSeminar1(hold5[2]);
-                    schedule[0][hold5[2]].addStudent(holdstudent.get(g));
-                }
-                else if(schedule[0][hold5[3]].checkNum()){
-                    holdstudent.get(g).setSeminar1(hold5[3]);
-                    schedule[0][hold5[3]].addStudent(holdstudent.get(g));
-                }
-                else if(schedule[0][hold5[4]].checkNum()){
-                    holdstudent.get(g).setSeminar1(hold5[4]);
-                    schedule[0][hold5[4]].addStudent(holdstudent.get(g));
+                if(holdstudent.get(g).getSeminar(p) == -1){
+                    if(schedule[session][hold5[session]].checkNum()){
+                        holdstudent.get(g).setSeminar(hold5[session],p);
+                        senior.get(g).setSeminar(hold5[session],p);
+                        schedule[session][hold5[session]].addStudent(holdstudent.get(g));
+                    }
                 }
             }
         }

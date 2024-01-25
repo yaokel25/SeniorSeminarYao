@@ -50,3 +50,10 @@ getRank()-tallying all student choices and putting data into array
 get5()-get top 5 choices by doing bubble sort 5 times
 with Rank()-register people for seminar based on choices only
 
+1/24:
+changed individual variables in student to arrayList (choices, seminars)
+started method to make schedule based off student choices and put extra students in random seminars
+added an arrayList of students to seminar objects
+made a 2d array of seminars called schedule which has all the seminars scheduled and the session they were scheduled in
+scanned in seminar names, instructors, and IDs seperately
+
