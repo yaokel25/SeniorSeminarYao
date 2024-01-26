@@ -57,3 +57,8 @@ added an arrayList of students to seminar objects
 made a 2d array of seminars called schedule which has all the seminars scheduled and the session they were scheduled in
 scanned in seminar names, instructors, and IDs seperately
 
+1/26:
+finished all scheduling methods 
+need to debug logic in scheduling methods class Schedule
+built tester class to run all schedule methods 
+
