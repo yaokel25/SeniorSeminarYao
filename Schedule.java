@@ -92,7 +92,6 @@ public class Schedule{
         return rankChoice;
     }//method getRank
     
-    
     public int[] get5(){
         //make copy of rankChoice array
         int[] holdSeminar = new int[numSeminars - 2];
@@ -103,7 +102,7 @@ public class Schedule{
         int holdIndex = 0;
         int holdNum = 0;
         for(int j = 0; j < numRoom; j++){
-            for(int f = 0; f < numSeminars; f++){
+            for(int f = 0; f < numSeminars - 2; f++){
                 if(holdSeminar[f] > holdNum){
                     holdIndex = f;
                     holdNum = holdSeminar[f];
@@ -122,39 +121,63 @@ public class Schedule{
     
     public void makeSchedule(int session){
         for(int i = 0; i < numRoom; i++){
-            schedule[session][i] = seminarList.get(hold5[i]);
+            schedule[session][i] = seminarList.get(hold5[i]);//put top 5 available seminars into schedule at that session #
+            schedule[session][i].setRoom(i);//set rooms for seminars
         }
     }
     
     public void assignSession(int session){
-        ArrayList<Student> holdstudent = new ArrayList<Student>();
+        /*ArrayList<Student> holdstudent = new ArrayList<Student>();
         for(int p = 0; p < numStudents; p++){
             holdstudent.add(senior.get(p));
-        }
+        }*/
         for(int j = 0; j < numRoom; j++){
             for(int i = 0; i < numStudents; i++){
                 for(int h = 0; h < numChoices; h++){
-                    if(holdstudent.get(i).getChoice(h) == hold5[j] && schedule[session][j].checkNum()){
+                    if(senior.get(i).getChoice(h) == hold5[j] && schedule[session][j].checkNum()){
                         //holdstudent.get(i).setSeminar(hold5[j], h);
                         //holdstudent.get(i).setChoice(h);
                         senior.get(i).setSeminar(hold5[j], h);
                         senior.get(i).setChoice(h);
-                        schedule[session][j].addStudent(holdstudent.get(i));
+                        schedule[session][j].addStudent(senior.get(i));
                     }
                 }
             }
         }
         //assign students who did not pick any of the choice or did not rank seminars at all randomly to any open seminar
         for(int g = 0; g < numStudents; g++){
-            for(int p = 0; p < numChoices; p++){
-                if(holdstudent.get(g).getSeminar(p) == -1){
-                    if(schedule[session][hold5[session]].checkNum()){
-                        holdstudent.get(g).setSeminar(hold5[session],p);
-                        senior.get(g).setSeminar(hold5[session],p);
-                        schedule[session][hold5[session]].addStudent(holdstudent.get(g));
+                if(senior.get(g).getSeminar(session) == -1){
+                    for(int r = 0; r < numChoices; r++){
+                    if(schedule[session][0].checkNum()){
+                        //holdstudent.get(g).setSeminar(hold5[0],p);
+                        senior.get(g).setSeminar(hold5[0],session);
+                        schedule[session][0].addStudent(senior.get(g));
+                    }
+                    else if(schedule[session][1].checkNum()){
+                        //holdstudent.get(g).setSeminar(hold5[1],p);
+                        senior.get(g).setSeminar(hold5[1],session);
+                        schedule[session][1].addStudent(senior.get(g));
+                    }
+                    else if(schedule[session][2].checkNum()){
+                        //holdstudent.get(g).setSeminar(hold5[2],p);
+                        senior.get(g).setSeminar(hold5[2],session);
+                        schedule[session][2].addStudent(senior.get(g));
+                    }
+                    else if(schedule[session][3].checkNum()){
+                        //holdstudent.get(g).setSeminar(hold5[3],p);
+                        senior.get(g).setSeminar(hold5[3],session);
+                        schedule[session][3].addStudent(senior.get(g));
+                    }
+                    else if(schedule[session][4].checkNum()){
+                        //holdstudent.get(g).setSeminar(hold5[4],p);
+                        senior.get(g).setSeminar(hold5[4],session);
+                        schedule[session][4].addStudent(senior.get(g));
                     }
                 }
             }
         }
+    }
+    public Seminar[][] returnSchedule(){
+        return schedule;
     }
 }

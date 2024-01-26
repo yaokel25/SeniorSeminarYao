@@ -11,6 +11,12 @@ public class Tester {
             test1.makeSchedule(i);
             test1.assignSession(i);
         }
+        for(int t = 0; t < 5; t++){
+            for(int u = 0; u < 5; u++){
+                System.out.println(test1.returnSchedule()[t][u]);
+            }
+            System.out.println();
+        }
         
     }
 }
