@@ -89,6 +89,7 @@ public class Schedule{
                 }
             }
         }//for-49
+        System.out.println("getRank");
         return rankChoice;
     }//method getRank
     
