@@ -29,6 +29,6 @@ public void setRoom(int roomNum){
     rm = roomNum;
 }
 public String toString(){
-    return (name1 + " " + seminarID + " " + instru + " " + rm  + " " + studentList.size());
+    return (name1 + " " + seminarID + " " + instru + " " + rm  + " " + studentList.size() + " " + studentList+ "\n");
 }
 }

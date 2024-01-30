@@ -27,7 +27,7 @@ public class Student{
         return seminar[index];
     }
    public String toString(){
-    return(email + " " + name + " " + choice[0] + " " + choice[1] + " " + choice[2] + " " + choice[3] + " " + choice[4] + " " + seminar[0] + " " + seminar[1] + " " + seminar[2] + " " + seminar[3] + " " + seminar[4] + "\n");
+    return(email + " " + name + " " + choice[0] + " " + choice[1] + " " + choice[2] + " " + choice[3] + " " + choice[4] + " " + ", " + seminar[0] + " " + seminar[1] + " " + seminar[2] + " " + seminar[3] + " " + seminar[4] + "\n");
    }
 
 }
