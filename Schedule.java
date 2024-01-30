@@ -136,10 +136,10 @@ public class Schedule{
         for(int p = 0; p < numStudents; p++){
             holdstudent.add(senior.get(p));
         }*/
-        for(int i = 0; i < numRoom; i++){
-            for(int j = 0; j < numChoices; j++){
+        for(int i = 0; i < numChoices; i++){
+            for(int j = 0; j < numRoom; j++){
                 for(int h = 0; h < numStudents; h++){
-                    if((senior.get(h).getChoice(i) != 0) && senior.get(h).getChoice(i) != 19 && senior.get(h).getChoice(i) == (hold5[j]+1) && schedule[session][j].checkNum() && senior.get(h).getSeminar(session) == -1){
+                    if(senior.get(h).getChoice(i) != 0 && senior.get(h).getChoice(i) != 19 && senior.get(h).getChoice(i) == (hold5[j]+1) && schedule[session][j].checkNum() && senior.get(h).getSeminar(session) == -1){
                         //holdstudent.get(i).setSeminar(hold5[j], h);
                         //holdstudent.get(i).setChoice(h);
                         int choices = senior.get(h).getChoice(i);
@@ -157,7 +157,7 @@ public class Schedule{
         //assign students who did not pick any of the choice or did not rank seminars at all randomly to any open seminar
         for(int g = 0; g < numStudents; g++){
                 if(senior.get(g).getSeminar(session) == -1){
-                    for(int r = 4; r >= 0; r++){
+                    for(int r = 4; r >= 0; r--){
                     if(schedule[session][r].checkNum()){
                         //holdstudent.get(g).setSeminar(hold5[0],p);
                         senior.get(g).setSeminar((hold5[r] +1),session);
