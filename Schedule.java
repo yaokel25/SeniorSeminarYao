@@ -168,13 +168,11 @@ public class Schedule{
         for(int g = 0; g < numStudents; g++){
             for(int r = 4; r >= 0; r--){
                 if(senior.get(g).getSeminar(session) == -1){
-                    for(int q = 0; q < numChoices; q++){
-                    if(schedule[session][r].checkNum()&& schedule[session][r].getID() != senior.get(g).getSeminar(q)){
+                    if(schedule[session][r].checkNum()&& schedule[session][r].getID() != senior.get(g).getSeminar(r)){
                         //holdstudent.get(g).setSeminar(hold5[0],p);
                         senior.get(g).setSeminar((hold5[r] +1),session);
                         schedule[session][r].addStudent(senior.get(g));
                     }
-                }
                 }
             }
         }
