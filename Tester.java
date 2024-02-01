@@ -27,11 +27,13 @@ public class Tester {
             test1.makeSchedule(u);
             test1.assignSession(u);
         }
-        /*for(int e = 0; e < 5; e++){
+        
+        for(int e = 0; e < 5; e++){
             for(int a = 0; a < 5; a++){
                 System.out.println(test1.schedule[e][a]);
             }
-        }*/
+            System.out.println("");
+        }
         
         
         

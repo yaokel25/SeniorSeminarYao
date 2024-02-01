@@ -19,6 +19,15 @@ public Seminar(int iSeminarID, String iInstru, String name){
 public void addStudent(Student s1){
     studentList.add(s1);
 }
+public String getInstructor(){
+    return instru;
+}
+public String getName(){
+    return name1;
+}
+public int getNum(){
+    return studentList.size();
+}
 public boolean checkNum(){
     if(studentList.size() >= numStudents){
         return false;
@@ -28,7 +37,16 @@ public boolean checkNum(){
 public void setRoom(int roomNum){
     rm = roomNum;
 }
+public void clearStudents(){
+    int numPeople = studentList.size() - 1;
+    for(int i = 0; i < numPeople; i++){
+        studentList.remove(i);
+    }
+}
+public int getID(){
+    return seminarID;
+}
 public String toString(){
-    return (name1 + " " + seminarID + " " + instru + " " + rm  + " " + studentList.size() + " " + studentList+ "\n");
+    return (name1 + " " + seminarID + " " + instru + " " + rm  + " " + studentList.size() + " " + studentList + "\n");
 }
 }
