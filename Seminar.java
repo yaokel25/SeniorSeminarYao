@@ -3,50 +3,49 @@ import java.util.ArrayList;
 public class Seminar{
     private String name1;
     private int seminarID;
-    //private int session1Run = -1;
-    //private int session2Run = -1;
     private String instru;
     private int rm = -1;
-    //private int rm2 = -1;
     private int numStudents = 16;
     private ArrayList<Student> studentList = new ArrayList<Student>();
+    private int sessionNum = -1;
     
-public Seminar(int iSeminarID, String iInstru, String name){
+public Seminar(int iSeminarID, String iInstru, String name){//constructor-gets seminarID, instructor name, and seminar name and sets them
     seminarID = iSeminarID;
     instru = iInstru;
     name1 = name;
 }
-public void addStudent(Student s1){
+public void addStudent(Student s1){//add a student object to ArrayList of students
     studentList.add(s1);
 }
-public String getInstructor(){
+public String getInstructor(){//return String of instructor name
     return instru;
 }
-public String getName(){
+public String getName(){//return String of name of seminar
     return name1;
 }
-public int getNum(){
+public int getNum(){//returns number of students in Seminar
     return studentList.size();
 }
-public boolean checkNum(){
+public boolean checkNum(){//boolean to check if seminar is full
     if(studentList.size() >= numStudents){
         return false;
     }
     return true;
 }
-public void setRoom(int roomNum){
+public void setRoom(int roomNum){//set the room numer of the seminar
     rm = roomNum;
 }
-public void clearStudents(){
-    int numPeople = studentList.size() - 1;
-    for(int i = 0; i < numPeople; i++){
-        studentList.remove(i);
-    }
-}
-public int getID(){
+
+public int getID(){//return seminarID
     return seminarID;
 }
-public String toString(){
-    return (name1 + " " + seminarID + " " + instru + " " + rm  + " " + studentList.size() + " " + studentList + "\n");
+public void setSession(int session){//keeps track of which session the seminar is run 
+    sessionNum = session;
+}
+public int getRm(){//returns room number
+    return rm;
+}
+public String toString(){//toString-returns seminar and instructor name, seminar ID, room number, number of students, and students, session number
+    return ("Seminar name: " + name1 + " ," + "Seminar ID: " + seminarID + " ," + "Instructor Name: " + instru + " ," + "session number: " + sessionNum + " ," + "Room #: " + rm  + " ," + "# of students: " + " ," + studentList.size() + " ," + "Students: " + studentList + "\n");
 }
 }

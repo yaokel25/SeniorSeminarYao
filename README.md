@@ -58,7 +58,23 @@ made a 2d array of seminars called schedule which has all the seminars scheduled
 scanned in seminar names, instructors, and IDs seperately
 
 1/26:
-finished all scheduling methods 
+finished building program (all methods)-built assignSchedule, and makeSchedule
 need to debug logic in scheduling methods class Schedule
 built tester class to run all schedule methods 
+
+1/30:
+tried debugging Schedule.assignSession-replaced int j with session on lines 155 and 172
+figured out something is wrong with Schedule.makeSchedule-initialization of schedule[][] is changing ArrayList seminarList (line 124)
+tried making a copy of seminarList and setting it equal to the copy but didn't work (would need to make a new copy of ArrayList seminarList for every session)
+added people who didn't choose or didn't get their choice to least popular sessions first (didn't work-some people could not be scheduled for every session because they had done all available seminars in that session before)
+
+2/01:
+continued debugging:
+couldn't figure out why ArrayList of seminars (seminarList) is being changed by calls to a different, 2-d array of Seminars (schedule)-initialized schedule different by setting it equal to a new Seminar object instead
+did not have a feature to prevent students from doing a seminar twice, added that to 2nd part of assignSession
+added people who didn't choose or didn't get their choice to the most popular choice first (worked but probably bad for optimization)
+
+
+
+
 
