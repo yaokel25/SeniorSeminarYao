@@ -1,3 +1,13 @@
+/** Keliang Yao
+ * 2/03
+ * This is the Schedule class it contains methods canAdd (checks if seminars have been run less than two times), readFile (loads seminar and student info onto ArrayLists seminarList and senior),
+ * getRank (returns integer array where the index is the seminarID and the number stored is the num of votes for the seminar), get5 (returns integer array with top 5 seminar IDs that have run less than twice),
+ * makeSchedule (assigns students to seminars based on their choices and array from get5, and students who didn't choose or didn't get their choice will be put into any available seminars starting with the most popular),
+ * seminarRoster (prints roster based on the seminarID)
+ * roomRoster (prints roster based on room number)
+ * studentRoster (prints out student information and schedule based on student name)
+ */
+
 import java.util.ArrayList;
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
@@ -75,7 +85,7 @@ public class Schedule{
     public int[] getRank(){//creates array of ints where the index is seminar ID and the int stored in index is num of students who chose the seminar in one of their choices 
         int holdChoice = 0;
         //initialize rankChoice array
-        for(int i = 0; i < numSeminars - 2; i++){
+        for(int i = 0; i < numSeminars - 2; i++){//numSeminars is including 0 (no choice) and 19 (already got choice) so I only want the real seminar ID, hence the -2
             rankChoice[i] = 0;
         }
         
@@ -94,15 +104,15 @@ public class Schedule{
     
     public int[] get5(){//returns array of ints of top 5 choices from getRank()
         //make copy of rankChoice array
-        int[] holdSeminar = new int[numSeminars - 2];
-        for(int p = 0; p < numSeminars - 2; p++){
+        int[] holdSeminar = new int[numSeminars - 2];//only 18 seminars (not including 0 and 19)
+        for(int p = 0; p < numSeminars - 2; p++){//online 18 seminars (not including 0 and 19)
             holdSeminar[p] = rankChoice[p];
         }
         //get top 5 choices by doig bubble sort 5 times
         int holdIndex = 0;
         int holdNum = 0;
         for(int j = 0; j < numRoom; j++){
-            for(int f = 0; f < numSeminars - 2; f++){
+            for(int f = 0; f < numSeminars - 2; f++){//online 18 seminars (not including 0 and 19)
                 if(holdSeminar[f] > holdNum){
                     holdIndex = f;
                     holdNum = holdSeminar[f];
@@ -155,37 +165,30 @@ public class Schedule{
             }//for
         }//for
     }//assignSchedule
-    public int checkConflicts(){//tallies up total number of conflicts (where a student did not get their choice)-ranking not considered
-        int countCon = 0;
-        for(int t = 0; t < numStudents; t++){
-            for(int i = 0; i < numChoices; i++){
-                if(senior.get(t).getSeminar(i) != copyList.get(t).getChoice(i)){
-                    countCon++;
-                }
-            }
-        }
-        return countCon;
-    }
-    public ArrayList<Seminar> seminarRoster(int seminarID){//returns ArrayList of seminars based on seminar ID
-        ArrayList<Seminar> roster = new ArrayList<Seminar>();
+    
+    public void seminarRoster(int seminarID){//prints out roster based on inputted seminar ID
         for(int i = 0; i < numChoices; i++){
             for(int u = 0; u< numChoices; u++){
                 if(schedule[i][u].getID() == seminarID){
-                    roster.add(schedule[i][u]);
+                    System.out.print(schedule[i][u]);
                 }
             }
         }
-        return roster;
     }
-    public ArrayList<Seminar> roomRoster(int roomNum){
-        ArrayList<Seminar> roster = new ArrayList<Seminar>();
+    public void roomRoster(int roomNum){//prints out roster based on inputted room number
         for(int i = 0; i < numChoices; i++){
             for(int u = 0; u < numChoices; u++){
                 if(schedule[i][u].getRm() == roomNum){
-                    roster.add(schedule[i][u]);
+                    System.out.print(schedule[i][u]);
                 }
             }
         }
-        return roster;
+    }
+    public void studentRoster(String studentName){//prints out roster based on inputted student name
+        for(int i = 0; i < numStudents; i++){
+            if(senior.get(i).getName().equalsIgnoreCase(studentName)){
+                System.out.print(senior.get(i));
+            }
+        }
     }
 }//Schedule

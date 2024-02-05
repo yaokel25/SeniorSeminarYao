@@ -74,6 +74,8 @@ couldn't figure out why ArrayList of seminars (seminarList) is being changed by 
 did not have a feature to prevent students from doing a seminar twice, added that to 2nd part of assignSession
 added people who didn't choose or didn't get their choice to the most popular choice first (worked but probably bad for optimization)
 
+2/03:
+added java docs and comments 
 
 
 

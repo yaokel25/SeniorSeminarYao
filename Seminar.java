@@ -1,3 +1,10 @@
+/** Keliang Yao
+ * 2/03
+ * This is the Seminar class, it holds information about seminars (ArrayList of Students attending that seminar, seminar name, seminar ID, instructor name, room number, session number)
+ * it has methods to add students to the seminar, return name of instructor, return name of seminar, return number of students in seminar, check if there are less than 16 students attending the seminar,
+ * setting the room of the seminar, setting the session of the seminar, and get the room of the seminar
+ */
+
 import java.util.ArrayList;
 
 public class Seminar{
