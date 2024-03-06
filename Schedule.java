@@ -27,7 +27,8 @@ public class Schedule{
     private int numSeminars = 20;//not 18 because no choice is 0 and 19 is already completed choice
     private int numRoom = 5;
     private int numStudents = 74;
-    private int[] hold5 = new int[numRoom];
+    //private int[] hold5 = new int[numRoom];
+    private int[] hold5 = {-1, -1, -1, -1, -1};
     private ArrayList<Seminar> seminarList = new ArrayList<Seminar>();
     public Seminar[][] schedule = new Seminar[5][5];//public because it needs to be printed in Tester
     private int[] numTimes = new int[18];
@@ -104,6 +105,9 @@ public class Schedule{
     
     public int[] get5(){//returns array of ints of top 5 choices from getRank()
         //make copy of rankChoice array
+        for(int y = 0; y < 5; y++){
+            hold5[y] = -1;
+        }
         int[] holdSeminar = new int[numSeminars - 2];//only 18 seminars (not including 0 and 19)
         for(int p = 0; p < numSeminars - 2; p++){//online 18 seminars (not including 0 and 19)
             holdSeminar[p] = rankChoice[p];
@@ -112,31 +116,50 @@ public class Schedule{
         int holdIndex = 0;
         int holdNum = 0;
         for(int j = 0; j < numRoom; j++){
+            while(hold5[j] == -1){
             for(int f = 0; f < numSeminars - 2; f++){//online 18 seminars (not including 0 and 19)
+                
                 if(holdSeminar[f] > holdNum){
                     holdIndex = f;
                     holdNum = holdSeminar[f];
                 }//if
             }
+            
             if(canAdd(holdIndex)){
-                hold5[j] = holdIndex;
                 numTimes[holdIndex] ++;
+                System.out.println("S# " + holdIndex + " numTimes " + numTimes[holdIndex]);
+                hold5[j] = holdIndex;
+                holdSeminar[holdIndex] = 0;//seminar choices already counted so it is set to 0
+                holdIndex = 0;
+                holdNum = 0;
+                
             }
+            else{
             holdSeminar[holdIndex] = 0;//seminar choices already counted so it is set to 0
             holdIndex = 0;
             holdNum = 0;
+            }
+        }
+    }
+    
+        for(int y = 0; y < 5; y++){
+            System.out.println(hold5[y]);
         }
         return hold5;
+        
     }//method get5
 
     
     public void makeSchedule(int session){//intializes schedule[][] (2-d array of Seminar objects) with the most popular seminars and set room numbers 
         for(int i = 0; i < numRoom; i++){
-            schedule[session][i] = new Seminar(hold5[i] + 1, seminarList.get(i).getInstructor(), seminarList.get(i).getName());
+            schedule[session][i] = new Seminar(hold5[i] + 1, seminarList.get(hold5[i]).getInstructor(), seminarList.get(hold5[i]).getName());
             //schedule[session][i] = seminarList.get(hold5[i]);//didn't work-seminarList was being changed as schedule gets changed-used line 125 to initialize schedule instead
             schedule[session][i].setRoom(i +1);//set rooms for seminars-room numbers start at 1
             schedule[session][i].setSession(session + 1);//keeps track of which session the seminar is in (session is from 0-4 so to the +1 is to make it 1-5)
         }//for
+        for(int y = 0; y < 5; y++){
+            System.out.println(schedule[session][y]);
+        }
     }//makeSchedule
     
     public void assignSession(int session){//assigns students to seminars in hold5 based on their choices and randomly puts them in seminars (most popular first) if they didn't choose or didn't get their choice
@@ -184,6 +207,7 @@ public class Schedule{
             }
         }
     }
+    
     public void studentRoster(String studentName){//prints out roster based on inputted student name
         for(int i = 0; i < numStudents; i++){
             if(senior.get(i).getName().equalsIgnoreCase(studentName)){
@@ -191,4 +215,15 @@ public class Schedule{
             }
         }
     }
+    /*public int countConflicts(){
+        int conflicts = 0;
+        for(int i = 0; i < 73;i++){
+            for(int u = 0; u < numChoices; i++){
+                if(copyList.get(i).getChoice(u)!= senior.get(i).getSeminar(u)){
+                    conflicts++;
+                }
+        }
+    }
+    return conflicts;
+    }*/
 }//Schedule

@@ -27,7 +27,7 @@ public class Tester {
             }
             System.out.println("\n");
         }
-        
+        //System.out.println(test1.countConflicts());        
         //printing roster by seminar/instructor
         System.out.println("Enter seminar number to print roster: ");
         int seminarNum = scan.nextInt();
