@@ -53,6 +53,6 @@ public int getRm(){//returns room number
     return rm;
 }
 public String toString(){//toString-returns seminar and instructor name, seminar ID, room number, number of students, and students, session number
-    return ("Seminar name: " + name1 + " ," + "Seminar ID: " + seminarID + " ," + "Instructor Name: " + instru + " ," + "session number: " + sessionNum + " ," + "Room #: " + rm  + " ," + "# of students: " + " ," + studentList.size() + " ," + "Students: "  + "\n");
+    return ("Seminar name: " + name1 + " ," + "Seminar ID: " + seminarID + " ," + "Instructor Name: " + instru + " ," + "session number: " + sessionNum + " ," + "Room #: " + rm  + " ," + "# of students: " + " ," + studentList.size() + " ," + "\n");
 }
 }
