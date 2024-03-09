@@ -104,10 +104,11 @@ public class Schedule{
     }//method getRank
     
     public int[] get5(){//returns array of ints of top 5 choices from getRank()
-        //make copy of rankChoice array
+        //make sure all elements in hold5 are -1 (this was a problem because hold5 still had its previous elements from the session 1 when running session 2)
         for(int y = 0; y < 5; y++){
             hold5[y] = -1;
         }
+        //make copy of rankChoice array
         int[] holdSeminar = new int[numSeminars - 2];//only 18 seminars (not including 0 and 19)
         for(int p = 0; p < numSeminars - 2; p++){//online 18 seminars (not including 0 and 19)
             holdSeminar[p] = rankChoice[p];
@@ -125,8 +126,8 @@ public class Schedule{
                 }//if
             }
             
-            if(canAdd(holdIndex)){
-                numTimes[holdIndex] ++;
+            if(canAdd(holdIndex)){//if seminar has run less than 2 times
+                numTimes[holdIndex] ++;//add 1 to num times seminar has run
                 System.out.println("S# " + holdIndex + " numTimes " + numTimes[holdIndex]);
                 hold5[j] = holdIndex;
                 holdSeminar[holdIndex] = 0;//seminar choices already counted so it is set to 0
